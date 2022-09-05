@@ -17,18 +17,23 @@ try:
     table = st.selectbox("Choose table", tables)
     columns = list(tables[table])#[list(dict.keys())[0] for dict in tables[table]]
     column1 = st.selectbox("choose column1", columns)
-    if tables[table][column1] == None:
-        value1 = st.text_input("print keywords 1")
+    if len(tables[table][column1]) == 0:
+        value1 = st.text_area("print keywords 1", value = "type keyword")
     else:
         value1 = st.multiselect("choose column values 1", tables[table][column1])
 
     column2 = st.selectbox("choose column2", columns)
-    if tables[table][column2] == None:
-        value2 = st.text_input("print keywords 2")
+    if len(tables[table][column2]) == 0:
+        value2 = st.text_area("print keywords 2", value = "type keyword")
     else:
         value2 = st.multiselect("choose column values 2", tables[table][column2])
 
-
+    st.download_button(
+             "⬇️ Download result in CSV",
+             data="text;label",
+             file_name="result.csv",
+             mime="text/csv",
+         )
 
 
     # sound_provider = st.selectbox("Choose sound API", ('Play.ht','Amazon'))
